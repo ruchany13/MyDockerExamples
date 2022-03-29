@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  nginx_1:
+    build: ./app1
+    ports:
+      - "5001:80"
+
+  nginx_2:
+    build: ./app2
+    ports:
+      - "80:80"
+    
+  nginx_3:
+    build: ./app3
+    ports:
+      - "5002:80"

@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  nginx_web:
+    build: ./NginxApp
+    ports:
+      - "8001:80"
+  
+  flask_web:
+    build: ./FlaskApp
+    ports:
+      - "8002:5000"
