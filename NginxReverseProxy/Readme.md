@@ -12,3 +12,12 @@ A reverse proxy provides an additional level of abstraction and control to ensur
 - Security and anonymity – By intercepting requests headed for your backend servers, a reverse proxy server protects their identities and acts as an additional defense against security attacks. It also ensures that multiple servers can be accessed from a single record locator or URL regardless of the structure of your local area network.
 
 ## Reverse Proxy in Project
+
+## Usage
+
+You have to configurate for your website. After that;
+
+```
+cd NginxReverseProxy
+sh startup.sh
+
