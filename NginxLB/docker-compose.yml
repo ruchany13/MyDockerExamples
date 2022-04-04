@@ -1,0 +1,15 @@
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "7003:80"
+    
+  app1:
+    build: ./app1
+    ports:
+      - "7001:80"
+  
+  app2:
+    build: ./app2
+    ports:
+      - "7002:80"
