@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  proxy:
+    image: nginx:1-alpine
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d/:ro
+      - ./proxy/:/usr/share/nginx/html/:ro
+    ports:
+      - "7005:80"
+    networks:
+      - internal-network
+  
+  service_a:
+    image: nginx:1-alpine
+    hostname: service_a
+    volumes:
+      - ./service_a/:/usr/share/nginx/html/:ro
+    networks:
+      - internal-network
+    
+  app1:
+    image: nginx:1-alpine
+    volumes:
+      - ./app1/:/usr/share/nginx/html/:ro
+    ports:
+      - "7006:80"
+    
+  
+  app2:
+    image: nginx:1-alpine
+    volumes:
+      - ./app2/:/usr/share/nginx/html/:ro
+    ports:
+      - "7007:80"
+    
+    
+  app3:
+    image: nginx:1-alpine
+    volumes:
+      - ./app3/:/usr/share/nginx/html/:ro
+    ports:
+      - "7008:80"
+ 
+
+
+networks:
+  internal-network:
