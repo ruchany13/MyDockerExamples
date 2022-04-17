@@ -12,7 +12,7 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "80:80"
+      - "7003:80"
     depends_on:
       - nginx_1
       - nginx_2
