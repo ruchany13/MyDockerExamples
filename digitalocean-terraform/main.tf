@@ -17,3 +17,4 @@ resource "digitalocean_droplet" "terramino" {
   region    = "nyc1"
   size      = "s-1vcpu-1gb"
 }
+
