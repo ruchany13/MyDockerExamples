@@ -13,3 +13,18 @@ export DIGITALOCEAN_ACCESS_TOKEN="your_access_token"
 touch main.tf
 ```
 This file include Terraform details, provider details and Droplet details. 
+
+4. Create *output.tf* file:
+```bash
+touch output.tf
+```
+This file writes a new Droplet IP at the end of the procedure.
+
+5. Now, initialize Terraform and run:
+```bash
+terraform init
+terraaform apply
+```
+Go and check your Digital Ocean account. You'll find new born Droplet. You can see new Droplet's IP adress at end.
+
+Thanks for reading;
