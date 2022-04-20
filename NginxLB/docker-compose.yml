@@ -2,17 +2,16 @@ services:
   nginx_1:
     build: ./app1
     ports:
-      - "7001:80"
+      - "7006:80"
   
   nginx_2:
     build: ./app2
     ports:
-      - "7002:80"
+      - "7007:80"
   
-  nginx:
+  nginxlb:
     build: ./nginx
     ports:
-      - "7003:80"
     depends_on:
       - nginx_1
       - nginx_2
