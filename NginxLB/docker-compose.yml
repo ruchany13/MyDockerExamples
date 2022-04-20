@@ -12,7 +12,6 @@ services:
   nginxlb:
     build: ./nginx
     ports:
-      - "7005:80"
     depends_on:
       - nginx_1
       - nginx_2
