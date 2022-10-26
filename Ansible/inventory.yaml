@@ -1,0 +1,6 @@
+aws_vm:
+  hosts:
+    ubuntu:
+      ansible_host: Ubuntu_AWS
+
+

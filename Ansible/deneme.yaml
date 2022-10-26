@@ -1,0 +1,24 @@
+- name: Install Neovim
+  become: true
+  hosts: do_vm
+  tasks:
+    - name: Install Aptitude
+      ansible.builtin.apt:
+        name: aptitude
+
+    - name: Install Neovim
+      ansible.builtin.apt:
+        name: neovim
+
+    - name: Install Doom Nvim Git
+      ansible.builtin.git:
+        repo: https://github.com/NTBBloodbath/doom-nvim.git
+        dest: ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
+        version: main
+
+#    - name: Install Doom-Nvim
+#      ansible.builtin.uri:
+#        url: https://raw.githubusercontent.com/NTBBloodbath/doom-nvim/main/tools/install.s
+#        method: GET
+#      register: result
+#      changed_when: false
