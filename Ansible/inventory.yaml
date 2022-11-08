@@ -1,6 +1,9 @@
 aws_vm:
   hosts:
     ubuntu:
-      ansible_host: Ubuntu_AWS
+      ansible_host: 161.35.27.6
 
-
+do_test:
+  hosts:
+    master:
+      ansible_host: master.local

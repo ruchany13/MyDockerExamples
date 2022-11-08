@@ -22,3 +22,6 @@
 #        method: GET
 #      register: result
 #      changed_when: false
+- name: Docker
+  become: true
+  hosts: 
