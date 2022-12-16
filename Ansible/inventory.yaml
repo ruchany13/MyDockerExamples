@@ -1,9 +1,22 @@
-aws_vm:
-  hosts:
-    ubuntu:
-      ansible_host: 161.35.27.6
+#This is example file
+digital_ocean:
+  children:
+    my_kubernetes:
+      hosts:
+        master:
+          ansible_host: 164.92.174.89
+          ansible_user: root
+        
+        worker:
+          ansible_host: 165.232.116.27
+          ansible_user: root
 
-do_test:
-  hosts:
-    master:
-      ansible_host: master.local
+        worker2:
+          ansible_host: 142.93.165.152
+          ansible_user: root
+        
+
+       
+
+
+
