@@ -5,6 +5,7 @@
     - name: Install Aptitude
       ansible.builtin.apt:
         name: aptitude
+        update_cache: true
 
     - name: Install Neovim
       ansible.builtin.apt:
@@ -22,6 +23,3 @@
 #        method: GET
 #      register: result
 #      changed_when: false
-- name: Docker
-  become: true
-  hosts: 
