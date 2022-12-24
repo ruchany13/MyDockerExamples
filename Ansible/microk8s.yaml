@@ -56,28 +56,25 @@
 #   hosts: new
 #   become: true
 
-- name: Docker run nginx
-  hosts: basistek
-  become: true
-  tasks:
-    - name: Docker Python
-      ansible.builtin.pip:
-        name: docker-py
-    - name: Pull nginx container
-      community.docker.docker_image:
-        name: nginx
-        source: pull
-    - name: Run nginx 
-      docker_container:
-        name: mainpage
-        image: nginx
-        ports:
-          - "80:80"
+# - name: Docker run nginx
+#   hosts: basistek
+#   become: true
+#   tasks:
+#     - name: Docker Python
+#       ansible.builtin.pip:
+#         name: docker-py
+#     - name: Pull nginx container
+#       community.docker.docker_image:
+#         name: nginx
+#         source: pull
+#     - name: Run nginx 
+#       docker_container:
+#         name: mainpage
+#         image: nginx
+#         ports:
+#           - "80:80"
 
-- name: Kubectl Installation
-  hosts: basistek
-  tasks:
-    - name: 
-
-- name: Passbolt
-  hosts: passbolt
+# - name: Kubectl Installation
+#   hosts: basistek
+#   tasks:
+#     - name: 
