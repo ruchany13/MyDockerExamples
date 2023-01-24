@@ -4,15 +4,15 @@ digital_ocean:
     my_kubernetes:
       hosts:
         master:
-          ansible_host: 164.92.174.89
+          ansible_host: ip_adreess
           ansible_user: root
         
         worker:
-          ansible_host: 165.232.116.27
+          ansible_host: ip_adreess
           ansible_user: root
 
         worker2:
-          ansible_host: 142.93.165.152
+          ansible_host: ip_adreess
           ansible_user: root
         
 
