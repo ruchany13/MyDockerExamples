@@ -1,5 +1,5 @@
 - name: Docker Install
-  hosts: host
+  hosts: GCP
   become: true
   tasks:
     - name: Install aptitude
@@ -41,18 +41,21 @@
     - name: Docker Compose Install
       ansible.builtin.apt:
         name: docker-compose-plugin
-      
-     - name: Pull nginx container
-       community.docker.docker_image:
-         name: nginx
-         source: pull
+- name: Docker Run nginx
+  hosts:
+  become: true
+  tasks:
+    - name: Pull nginx container
+      community.docker.docker_image:
+        name: nginx
+        source: pull
 
-     - name: Run nginx 
-       docker_container:
-         name: mainpage
-         image: nginx
-         ports:
-           - "80:80"
+    - name: Run nginx 
+      docker_container:
+        name: mainpage
+        image: nginx
+        ports:
+          - "80:80"
 
 
 
