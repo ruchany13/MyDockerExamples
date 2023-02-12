@@ -1,21 +1,21 @@
 - name: Docker Install
-  hosts: GCP
+  hosts: gcp
   become: true
   tasks:
     - name: Install aptitude
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
         state: latest
         pkg:
-        - gpg
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - aptitude
-        - python3-pip
-        - virtualenv
-        - python3-setuptools
+          - gpg
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - aptitude
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
 
     - name: Add Docker GPG apt Key
       ansible.builtin.apt_key:
@@ -26,23 +26,24 @@
       ansible.builtin.apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal stable
         state: present
-    
+
     - name: Update and Install docker-ce
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
         state: latest
         pkg:
-        -  docker-ce
+          - docker-ce
 
     - name: Install Docker Module for Python
       ansible.builtin.pip:
         name: docker-py
-    
+
     - name: Docker Compose Install
       ansible.builtin.apt:
         name: docker-compose-plugin
+
 - name: Docker Run nginx
-  hosts:
+  hosts: gcp
   become: true
   tasks:
     - name: Pull nginx container
@@ -50,14 +51,9 @@
         name: nginx
         source: pull
 
-    - name: Run nginx 
-      docker_container:
+    - name: Run nginx
+      community.docker.docker_container:
         name: mainpage
         image: nginx
         ports:
           - "80:80"
-
-
-
-
-

@@ -1,5 +1,5 @@
 - name: Docker Run nginx
-  hosts:
+  hosts: gcp
   become: true
   tasks:
     - name: Pull nginx container
@@ -7,8 +7,8 @@
         name: nginx
         source: pull
 
-    - name: Run nginx 
-      docker_container:
+    - name: Run nginx
+      community.docker.docker_container:
         name: mainpage
         image: nginx
         ports:

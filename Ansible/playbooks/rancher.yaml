@@ -2,9 +2,9 @@
   hosts: GCP
   become: true
   tasks:
-    - name: Required packages 
+    - name: Required packages
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
         state: latest
         pkg:
           - ca-certificates
@@ -20,7 +20,7 @@
         state: present
     - name: Install Kubectl
       ansible.builtin.apt:
-        update_cache: yes
+        update_cache: true
         state: latest
         pkg:
           - kubectl
@@ -28,7 +28,7 @@
       community.general.snap:
         name: helm
         classic: true
-    - name: Install pip 
+    - name: Install pip
       ansible.builtin.pip:
         name:
           - PyYAML
@@ -50,9 +50,7 @@
 
     - name: Install the cert-manager Helm
       kubernetes.core.helm:
-        name: cert-manager 
+        name: cert-manager
         chart_ref: jetstack/cert-manager
         chart_version: v1.7.1
         release_namespace: cert-manager
-
-      
