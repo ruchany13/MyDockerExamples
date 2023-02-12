@@ -1,0 +1,56 @@
+- name: Rancher Installation
+  hosts: GCP
+  become: true
+  tasks:
+    - name: Required packages
+      ansible.builtin.apt:
+        update_cache: true
+        state: latest
+        pkg:
+          - ca-certificates
+          - curl
+          - python3-pip
+    - name: Add Google Cloud gpg Key
+      ansible.builtin.apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+    - name: Add Kubernetes apt Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+    - name: Install Kubectl
+      ansible.builtin.apt:
+        update_cache: true
+        state: latest
+        pkg:
+          - kubectl
+    - name: Install Helm
+      community.general.snap:
+        name: helm
+        classic: true
+    - name: Install pip
+      ansible.builtin.pip:
+        name:
+          - PyYAML
+          - jsonpatch
+    - name: Add Rancher Helm Repository
+      kubernetes.core.helm_repository:
+        name: rancher-stable
+        repo_url: https://releases.rancher.com/server-charts/stable
+
+    - name: Create namespace for Rancher
+      ansible.builtin.command: k3s kubectl create namespace cattle-system
+
+    - name: Create namespace for jetstack
+      ansible.builtin.command: k3s kubectl create namespace cert-manager
+    - name: Add Jetstack Helm repository
+      kubernetes.core.helm_repository:
+        name: jetstack
+        repo_url: https://charts.jetstack.io
+
+    - name: Install the cert-manager Helm
+      kubernetes.core.helm:
+        name: cert-manager
+        chart_ref: jetstack/cert-manager
+        chart_version: v1.7.1
+        release_namespace: cert-manager

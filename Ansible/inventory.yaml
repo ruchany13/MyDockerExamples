@@ -1,0 +1,22 @@
+#This is example file
+digital_ocean:
+  children:
+    my_kubernetes:
+      hosts:
+        master:
+          ansible_host: ip_adreess
+          ansible_user: root
+        
+        worker:
+          ansible_host: ip_adreess
+          ansible_user: root
+
+        worker2:
+          ansible_host: ip_adreess
+          ansible_user: root
+        
+
+       
+
+
+
