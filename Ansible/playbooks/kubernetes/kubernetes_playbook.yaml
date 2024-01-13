@@ -1,0 +1,90 @@
+- name: Kubernetes
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Disable Swap
+      command: swapoff -a
+      ignore_errors: yes
+
+    - name: Remove Swap Entry from /etc/fstab
+      lineinfile:
+        path: /etc/fstab
+        state: absent
+        regexp: '^/swapfile'
+
+    - name: Remove Swap File
+      file:
+        path: /swapfile
+        state: absent
+
+    - name: Overlay Module
+      command: modprobe overlay
+
+    - name: br_netfilter Module
+      command: modprobe br_netfilter
+
+    - name: Creating a file with content
+      copy:
+        dest: "/etc/sysctl.d/k8s.conf"
+        content: |
+          net.bridge.bridge-nf-call-ip6tables = 1
+          net.bridge.bridge-nf-call-iptables = 1
+          net.ipv4.ip_forward = 1
+   
+    - name: Apply sysctl
+      command: sysctl -p /etc/sysctl.d/k8s.conf
+    
+    - name: Install containerd
+      apt:
+        name: containerd
+        update_cache: yes
+        state: present
+
+    - name: Create containerd config directory
+      file:
+       path: /etc/containerd
+       state: directory
+    
+    - name: Contanierd Config File
+      ansible.builtin.shell: containerd config default > /etc/containerd/config.toml
+
+    - name: Active Cgroup
+      lineinfile:
+        path: /etc/containerd/config.toml
+        regexp: '^            SystemdCgroup '  # Değiştirilecek satırı bulma
+        line: '            SystemdCgroup = true' # Değiştirilecek satır
+
+    - name: Restart Containerd
+      ansible.builtin.systemd_service:
+         state: restarted
+         daemon_reload: true
+         name: containerd
+
+    - name: add gpg key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+   
+    - name: add kubernetes repo
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+
+    - name: Install kubectl, kubeadm, kubelet
+      apt:
+        name:
+          - kubectl
+          - kubeadm
+          - kubelet
+        update_cache: yes
+        state: present
+
+    - name: Hold apt packages
+      dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
+      loop:
+        - kubectl
+        - kubeadm
+        - kubelet
+

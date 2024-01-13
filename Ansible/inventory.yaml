@@ -1,19 +1,17 @@
 #This is example file
-digital_ocean:
+gcp:
   children:
-    my_kubernetes:
+    kubernetes:
       hosts:
         master:
-          ansible_host: ip_adreess
-          ansible_user: root
+          ansible_host: 
+          ansible_user: 
+          ansible_ssh_private_key_file: 
         
         worker:
-          ansible_host: ip_adreess
-          ansible_user: root
-
-        worker2:
-          ansible_host: ip_adreess
-          ansible_user: root
+          ansible_host: 
+          ansible_user: 
+          ansible_ssh_private_key_file: 
         
 
        
