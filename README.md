@@ -1,6 +1,5 @@
 # Overwiev
- Hello! There is a lot of Docker examples. I running docker in my [website](http://ruchan.me).
- My website is running on Ubuntu Server in Digital Ocean.
+ Hello! There is a lot of Docker examples. 
  
  ## Content
 - **LB_ReverseP_Nginx:** This file contains both a reverse proxy and a load balancer. It's running with both Nginx and Docker compose.
