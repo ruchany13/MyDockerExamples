@@ -1,0 +1,73 @@
+version: '3'
+services:
+
+  registry:
+    image: registry:latest
+    container_name: registry
+    hostname: registry
+    restart: always
+    environment:
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: Registry-Realm
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/registry.passwd
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+      REGISTRY_STORAGE_DELETE_ENABLED: 'true'
+    volumes:
+      - ./registry_data:/data
+      - ./auth:/auth
+    networks:
+      - docker
+
+  portainer:
+    image: portainer/portainer-ce
+    hostname: portainer
+    container_name: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer_data:/data
+    networks:
+     - docker
+
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: nginx_registry
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl/:/etc/nginx/ssl/
+    networks:
+      - docker
+    depends_on:
+      - registry
+      - portainer
+
+  registry-ui:
+    image: joxit/docker-registry-ui:main
+    hostname: registry-ui
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - SINGLE_REGISTRY=true
+      - REGISTRY_TITLE=Docker Registry UI
+      - DELETE_IMAGES=true
+      - SHOW_CONTENT_DIGEST=true
+      - NGINX_PROXY_PASS_URL=http://registry:5000
+      - SHOW_CATALOG_NB_TAGS=true
+      - CATALOG_MIN_BRANCHES=1
+      - CATALOG_MAX_BRANCHES=1
+      - TAGLIST_PAGE_SIZE=100
+      - REGISTRY_SECURED=false
+      - CATALOG_ELEMENTS_LIMIT=1000
+    container_name: registry-ui
+    networks:
+      - docker
+
+networks:
+  docker:
+    driver: bridge
