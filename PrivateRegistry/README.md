@@ -1,1 +1,2 @@
 # Private Docker Registry with Docker UI and Private Registry UI
+In this example applicaton, there are Private Docker Registry for air grapped env., security etc. Used **Portainer** for manage docker containers easily. In portainer, showing docker registry feature is non-free. So, can choose [registry-ui](https://github.com/Joxit/docker-registry-ui) or charge for portainer. Setuped with portainer and registry ui this example.
