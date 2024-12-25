@@ -1,17 +1,28 @@
+version: '3'
+
 services:
-  nginx_1:
+  nginxserver:
+    build: ./nginx
+    ports:
+      - "7003:80"
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - LoadBalancerNet
+
+  app1:
     build: ./app1
     ports:
       - "7001:80"
-  
-  nginx_2:
+    networks:
+      - LoadBalancerNet
+
+  app2:
     build: ./app2
     ports:
       - "7002:80"
-  
-  nginxlb:
-    build: ./nginx
-    ports:"7003:80"
-    depends_on:
-      - nginx_1
-      - nginx_2
+    networks:
+      - LoadBalancerNet
+networks:
+  LoadBalancerNet:
