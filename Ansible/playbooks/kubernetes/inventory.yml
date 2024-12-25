@@ -1,0 +1,8 @@
+gcp:
+  hosts:
+    master:
+      ansible_host: master.mavano.software
+      ansible_user: root
+    worker:
+      ansible_host: worker1.mavano.software
+      ansible_user: root

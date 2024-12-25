@@ -13,9 +13,9 @@ touch inventory.yml
 touch nginx.yml
 ````
 - Now, we can run our playbook file:
-```
+```bash
 ansible-playbook -i inventory.yml nginx.yml
-````
+```
 
 It is basically:)
 
