@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Reverse Proxy and Load Balancer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #1f1f1f, #4CAF50);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px;
+        }
+        .title {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: #00E676;
+        }
+        .network-info {
+            background: #1E88E5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #ffffff;
+            display: inline-block;
+        }
+        .network-info span {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFEB3B;
+        }
+        .icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: #FF5722;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #BDBDBD;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🌐</div>
+        <h3 class="title">Welcome to My Docker Network</h3>
+        <p>Experience the power of Reverse Proxy and Load Balancing</p>
+        <div class="network-info">
+            <span>app2</span> server response: Connected
+        </div>
+        <p>Requests routed via reverse proxy</p>
+        <div class="footer">
+            Powered by Docker & Reverse Proxy & Load Balancer
+        </div>
+    </div>
+</body>
+</html>
