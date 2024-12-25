@@ -4,10 +4,9 @@ services:
   proxy:
     image: nginx:latest
     volumes:
-      - ./nginx/:/etc/nginx/conf.d/:ro
-      - ./proxy/:/usr/share/nginx/html/:ro
+      - ./proxy/:/etc/nginx/conf.d/:ro
     ports:
-      - "80:80"
+      - "8080:80"
     networks:
       - internal-network
     
@@ -16,7 +15,7 @@ services:
     volumes:
       - ./app1/:/usr/share/nginx/html/:ro
     ports:
-      - "7006:80"
+      - "8081:80"
     networks:
       - internal-network
     
@@ -26,7 +25,7 @@ services:
     volumes:
       - ./app2/:/usr/share/nginx/html/:ro
     ports:
-      - "7007:80"
+      - "8082:80"
     networks:
       - internal-network
     
@@ -35,7 +34,7 @@ services:
     volumes:
       - ./app3/:/usr/share/nginx/html/:ro
     ports:
-      - "7008:80"
+      - "8083:80"
     networks:
       - internal-network
  
