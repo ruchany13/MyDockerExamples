@@ -23,7 +23,7 @@ Everything is bundled with **Docker Compose** and **Nginx** as a reverse proxy.
 ## Documentation and Setup Guide
 
 A full, step-by-step guide is available on my blog:  
-👉 [How to Build a Secure Docker Registry with TLS, Authentication and UI](https://www.ruchan.dev/blog/barman/BarmanSetupLocal/)
+👉 [How to Build a Secure Docker Registry with TLS, Authentication and UI](https://www.ruchan.dev/Docker/PrivateRegistry/)
 
 The guide includes:
 - Certificate setup (trusted & self-signed options)
