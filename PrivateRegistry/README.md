@@ -1,21 +1,46 @@
-# Docker Private Registry with Portainer and registry-ui
+# Secure Docker Private Registry with UI and Authentication
 
-This repository contains the setup of a Docker Private Registry with Portainer and [registry-ui](https://github.com/Joxit/docker-registry-ui). An nginx container is used to access these 3 applications. All 3 applications are secured with SSL, so you will need a domain and certificate matching your server. If you have a domain address but no certificate, you can follow the parameters in the certificate creation section below.
+This project sets up a **Docker Private Registry** with:
+- **TLS (SSL) encryption** 🔒
+- **Authentication (username/password)** 🔑
+- **User Interface** via [docker-registry-ui](https://github.com/Joxit/docker-registry-ui) 📦
 
-- **Portainer**: Portainer is a universal container management platform. Used for manage Docker containers. Used community edition.
-- **Registry-ui**: Ui for Docker Private Registry. Used because Portainer Community Edition doesn't have ui for registry
+Everything is bundled with **Docker Compose** and **Nginx** as a reverse proxy.
 
-## Setup
-Clone this repository and change directory.
+---
+
+## Quick Overview
+
+- 📦 **Registry**: Store your Docker images privately and securely.
+- 🖥️ **UI**: Browse, manage, and delete images with a clean web interface.
+- 🛡️ **TLS**: Encrypt traffic between clients and registry.
+- 🔐 **Auth**: Protect access with username/password.
+
+> All containers are properly isolated and HTTPS-enabled.
+
+---
+
+## Documentation and Setup Guide
+
+A full, step-by-step guide is available on my blog:  
+👉 [How to Build a Secure Docker Registry with TLS, Authentication and UI](https://www.ruchan.dev/blog/barman/BarmanSetupLocal/)
+
+The guide includes:
+- Certificate setup (trusted & self-signed options)
+- Authentication setup
+- Handling UI proxy and edge cases
+- Docker login, push, pull examples
+- Advanced considerations for production deployments 🚀
+
+---
+
+## Project Structure
+
 ```bash
-cd MyDockerExamples/PrivateRegistry
-```
-Create credentials for registry with `httpasswd`. Change `username` with registry user which you want. After run command, give the password.
-```bash
-mkdir auth/
-cd auth
-htpasswd -Bc registry.password username
-```
-
-## Certificate Creation
-If you have certificate, create ssl file and copy in the file. If you don't have run this commands:
+├── docker-compose.yml
+├── auth/
+│   └── registry.passwd
+├── nginx/
+│   ├── nginx.conf
+│   └── ssl/
+└── registry_data/
